@@ -239,8 +239,10 @@ export default {
       // Template will contain v-rows/etc like on main Team page.
       let matchData = await this.GetMatchData(this.match_id);
       if (matchData.end_time == null) {
-           this.GetMapStatsStream(matchData);
-           this.GetMapPlayerStatsStream(matchData);
+           //this.GetMapStatsStream(matchData);
+           //this.GetMapPlayerStatsStream(matchData);
+           this.getMapString(matchData);
+           this.GetMapPlayerStats(matchData);
       }
       else {
            this.getMapString(matchData);
