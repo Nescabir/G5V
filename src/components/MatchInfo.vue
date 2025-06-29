@@ -195,7 +195,11 @@ export default {
   methods: {
     async checkIfMatchLive() {
       let matchRes = await this.GetMatchData(this.match_id);
-      if (matchRes.end_time == null) await this.getStreamedMatchInfo();
+      if (matchRes.end_time == null) 
+      {
+        //await this.getStreamedMatchInfo();
+        await this.getMatchInfo();
+      }
       else await this.getMatchInfo();
     },
     async getStreamedMatchInfo() {
