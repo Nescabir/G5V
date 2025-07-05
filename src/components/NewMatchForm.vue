@@ -58,25 +58,22 @@
 
         <v-window-item :value="3">
           <div class="pa-4 text-center">
-            <v-select
+            <v-combobox
               v-model="newMatchData.team1_id"
               :items="teams"
               item-text="name"
               item-value="id"
+              :label="$t('CreateMatch.FormTeam1')"
               :rules="[
                 v => !!v || $t('CreateMatch.TeamRequired'),
                 () =>
                   newMatchData.team1_id != newMatchData.team2_id ||
                   $t('CreateMatch.TeamCannotBeEqual')
               ]"
-              :label="$t('CreateMatch.FormTeam1')"
-              required
-              ref="teamOne"
-              dense
-              outlined
-              return-object
-              attach
+              :filter="customFilter"
+              clearable
               solo
+              return-object
             />
             <v-select
               v-model="newMatchData.team2_id"
@@ -92,11 +89,6 @@
               :label="$t('CreateMatch.FormTeam2')"
               required
               ref="teamTwo"
-              dense
-              outlined
-              return-object
-              attach
-              solo
             />
             <v-divider />
             <v-row class="justify-center">
@@ -514,6 +506,11 @@ export default {
     this.MapList = await this.GetUserEnabledMapList(this.user.id);
   },
   methods: {
+    customFilter (item, queryText, itemText) {
+      const text = (itemText || '').toString().toLowerCase()
+      const query = (queryText || '').toString().toLowerCase()
+      return text.startsWith(query)
+    },
     async ReloadServers() {
       this.servers = await this.GetAllAvailableServers();
       let arrIndex = this.servers
