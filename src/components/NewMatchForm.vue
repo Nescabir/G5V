@@ -72,6 +72,11 @@
               :label="$t('CreateMatch.FormTeam1')"
               required
               ref="teamOne"
+              dense
+              outlined
+              return-object
+              attach
+              solo
             />
             <v-select
               v-model="newMatchData.team2_id"
@@ -87,6 +92,11 @@
               :label="$t('CreateMatch.FormTeam2')"
               required
               ref="teamTwo"
+              dense
+              outlined
+              return-object
+              attach
+              solo
             />
             <v-divider />
             <v-row class="justify-center">
