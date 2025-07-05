@@ -70,6 +70,7 @@
                   $t('CreateMatch.TeamCannotBeEqual')
               ]"
               :label="$t('CreateMatch.FormTeam1')"
+              :filterable="true"
               required
               ref="teamOne"
               dense
@@ -90,6 +91,7 @@
                   $t('CreateMatch.TeamCannotBeEqual')
               ]"
               :label="$t('CreateMatch.FormTeam2')"
+              :filterable="true"
               required
               ref="teamTwo"
               dense
