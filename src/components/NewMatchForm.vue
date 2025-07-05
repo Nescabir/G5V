@@ -75,20 +75,22 @@
               solo
               return-object
             />
-            <v-select
+            <v-combobox
               v-model="newMatchData.team2_id"
               :items="teams"
               item-text="name"
               item-value="id"
+              :label="$t('CreateMatch.FormTeam2')"
               :rules="[
                 v => !!v || $t('CreateMatch.TeamRequired'),
                 () =>
                   newMatchData.team2_id != newMatchData.team1_id ||
                   $t('CreateMatch.TeamCannotBeEqual')
               ]"
-              :label="$t('CreateMatch.FormTeam2')"
-              required
-              ref="teamTwo"
+              :filter="customFilter"
+              clearable
+              solo
+              return-object
             />
             <v-divider />
             <v-row class="justify-center">
