@@ -10,7 +10,7 @@
     <v-row class="justify-center">
       <v-col lg="6" sm="12">
         <v-card>
-          <v-card-title>{{ title }}</v-card-title>
+          <v-card-title>{{ matchtitle }}</v-card-title>
           <MatchTable class="justify-center" />
         </v-card>
       </v-col>
@@ -18,7 +18,7 @@
     <v-row class="justify-center">
       <v-col lg="6" sm="12">
         <v-card>
-          <v-card-title>{{ title }}</v-card-title>
+          <v-card-title>{{ playertitle }}</v-card-title>
           <PlayerLeaderboardTable :teamId="parseInt(this.$route.params.id)" />
         </v-card>
       </v-col>
@@ -42,7 +42,8 @@ export default {
   data() {
     return {
       newTeam: false,
-      title: "Recent Matches",
+      matchtitle: "Recent Matches",
+      playertitle: "Players Statistique",
       user: {
         admin: false,
         steam_id: "",
