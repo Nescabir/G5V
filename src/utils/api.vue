@@ -249,6 +249,19 @@ export default {
       }
       return message;
     },
+    async GetPublicTeams() {
+      let res;
+      let message;
+      try {
+        res = await this.axioCall.get(
+          `${process.env?.VUE_APP_G5V_API_URL || "/api"}/teams/public`
+        );
+        message = res.data.teams;
+      } catch (error) {
+        message = error.response.data.message;
+      }
+      return message;
+    },
     async GetMyTeams() {
       let res;
       let message;

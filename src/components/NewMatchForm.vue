@@ -58,37 +58,35 @@
 
         <v-window-item :value="3">
           <div class="pa-4 text-center">
-            <v-combobox
+            <v-select
               v-model="newMatchData.team1_id"
               :items="teams"
               item-text="name"
               item-value="id"
-              :label="$t('CreateMatch.FormTeam1')"
               :rules="[
                 v => !!v || $t('CreateMatch.TeamRequired'),
                 () =>
                   newMatchData.team1_id != newMatchData.team2_id ||
                   $t('CreateMatch.TeamCannotBeEqual')
               ]"
-              :filter="customFilter"
-              clearable
-              solo
+              :label="$t('CreateMatch.FormTeam1')"
+              required
+              ref="teamOne"
             />
-            <v-combobox
+            <v-select
               v-model="newMatchData.team2_id"
               :items="teams"
               item-text="name"
               item-value="id"
-              :label="$t('CreateMatch.FormTeam2')"
               :rules="[
                 v => !!v || $t('CreateMatch.TeamRequired'),
                 () =>
                   newMatchData.team2_id != newMatchData.team1_id ||
                   $t('CreateMatch.TeamCannotBeEqual')
               ]"
-              :filter="customFilter"
-              clearable
-              solo
+              :label="$t('CreateMatch.FormTeam2')"
+              required
+              ref="teamTwo"
             />
             <v-divider />
             <v-row class="justify-center">
@@ -489,7 +487,8 @@ export default {
         return a.user_id - this.user.id || b.public_server - a.public_server;
       });
     }
-    if (this.IsAnyAdmin(this.user)) this.teams = await this.GetAllTeams();
+    //if (this.IsAnyAdmin(this.user)) this.teams = await this.GetAllTeams();
+    if (this.IsAnyAdmin(this.user)) this.teams = await this.GetPublicTeams();
     else {
       let tmpPublicTeams = await this.GetAllTeams();
       this.teams = await this.GetMyTeams();
@@ -506,11 +505,6 @@ export default {
     this.MapList = await this.GetUserEnabledMapList(this.user.id);
   },
   methods: {
-    customFilter (item, queryText, itemText) {
-      const text = (itemText || '').toString().toLowerCase()
-      const query = (queryText || '').toString().toLowerCase()
-      return text.startsWith(query)
-    },
     async ReloadServers() {
       this.servers = await this.GetAllAvailableServers();
       let arrIndex = this.servers
