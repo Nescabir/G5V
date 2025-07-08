@@ -73,7 +73,6 @@
               :filter="customFilter"
               clearable
               solo
-              return-object
             />
             <v-combobox
               v-model="newMatchData.team2_id"
@@ -90,7 +89,6 @@
               :filter="customFilter"
               clearable
               solo
-              return-object
             />
             <v-divider />
             <v-row class="justify-center">
